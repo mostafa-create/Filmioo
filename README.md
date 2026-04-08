@@ -10,6 +10,7 @@
 * 🎨 **Cosmic UI/UX:** A custom dark-mode interface crafted with a hybrid of **Tailwind CSS** and **Bootstrap 5**, featuring high-end glassmorphism and AOS (Animate On Scroll) effects.
 * 🔐 **Secure User Profiles:** Full integration with **ASP.NET Core Identity** for personalized profiles, custom avatars, and watchlist management.
 * 📊 **Automated Rating System:** Real-time backend calculation of average movie ratings based on user feedback.
+* ✅ **Robust Admin Dashboard**: Integrated a comprehensive management system for Admins to perform full CRUD operations on Movies, Actors, and Genres, maintaining complete control over the platform's content. 
 
 
 ## 🛠️ Tech Stack
