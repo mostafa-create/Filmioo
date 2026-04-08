@@ -52,7 +52,4 @@ Curious to see **Filmioo** in action? Check out the full walkthrough and UI demo
 
 👉 **[Watch the Demo Video on LinkedIn](PASTE_YOUR_LINKEDIN_URL_HERE)**
 
----
 
-### 👨‍💻 Developed by **Mostafa Yassin**
-*Software Engineering student at Sohag University.*
