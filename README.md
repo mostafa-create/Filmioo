@@ -44,6 +44,6 @@ The project follows the separation of concerns principle to ensure maintainabili
 
 Curious to see **Filmioo** in action? Check out the full walkthrough and UI demonstration on LinkedIn:
 
-👉 **[Watch the Demo Video on LinkedIn](PASTE_YOUR_LINKEDIN_URL_HERE)**
+👉 **[Watch the Demo Video on LinkedIn](https://www.linkedin.com/posts/mostafa-yassin-778792258_aspnetcore-csharp-webdevelopment-activity-7447650953744302080-1ryW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD95vswBnXk7PrJb62t36aJ2wMLQzrOHB9A)**
 
 
