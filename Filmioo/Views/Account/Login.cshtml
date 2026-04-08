@@ -1,0 +1,33 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/AuthLayout.cshtml";
+}
+<div class="background-animation"></div>
+<div class="register-container">
+    <div class="logo">Filmioo</div>
+    <br />
+    <h1>Welcome Back</h1>
+    <br />
+    <form asp-action="Login" asp-controller="Account" method="post" id="registerForm">
+        <div>
+            <div class="form-group">
+                <label asp-for="EmailAddress">Email Address</label>
+                <input asp-for="EmailAddress" required>
+                <span asp-validation-for="EmailAddress" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" required>
+                <span asp-validation-for="Password" class="error-message"></span>
+            </div>
+        </div>
+        <button type="submit" class="register-button">Login</button>
+    </form>
+    <br />
+    <p>Sign Up? <a asp-action="Register"> Register Now!</a></p>
+    <p>Forget Password? <a asp-action="ForgetPassword"> ResetPassword</a></p>
+</div>
+@section ClientSideValidation {
+    <partial name="_ValidationScriptsPartial" />
+}

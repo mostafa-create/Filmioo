@@ -1,0 +1,350 @@
+﻿@model IEnumerable<ActorViewModel>
+@{
+    ViewData["Title"] = "All Actors";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filmioo - Actors</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link href="~/css/actors.css" rel="stylesheet" asp-append-version="true" />
+    <style>
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(138, 43, 226, 0.3); 
+            border-radius: 50px; 
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+            .search-wrapper:focus-within {
+                border-color: #8a2be2;
+                box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+        .search-icon {
+            color: #a29bfe;
+            margin-left: 15px;
+            font-size: 1.1rem;
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 12px 15px;
+            width: 100%;
+            outline: none;
+            font-size: 1rem;
+        }
+
+            .search-input::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+        .search-button {
+            background: linear-gradient(45deg, #6c5ce7, #8a2be2);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .search-button:hover {
+                transform: scale(1.03);
+                box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+            }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 110%; 
+            left: 0;
+            right: 0;
+            background: #1a1a1a;
+            border: 1px solid rgba(138, 43, 226, 0.5);
+            border-radius: 15px;
+            z-index: 1000;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .search-result-item {
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+
+            .search-result-item:hover {
+                background: rgba(138, 43, 226, 0.2);
+            }
+
+        .result-year {
+            color: #8a2be2;
+            font-size: 0.85rem;
+        }
+        .filmioo-navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 3px solid var(--filmioo-purple-main);
+        }
+
+        .filmioo-logo {
+            color: var(--filmioo-purple-main) !important;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--filmioo-purple-light);
+        }
+        .filmioo-nav-link {
+            display: flex;
+            align-items: center;
+            color: var(--filmioo-text-color) !important;
+            font-size: 0.9rem !important;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            padding: 0.5rem 0.75rem !important;
+            transition: all 0.25s ease-in-out;
+            opacity: 0.85;
+        }
+
+            .filmioo-nav-link i {
+                font-size: 1rem; 
+                margin-right: 6px; 
+                color: var(--filmioo-purple-light); 
+            }
+
+            .filmioo-nav-link:hover {
+                color: #fff !important;
+                opacity: 1;
+                transform: translateY(-1px); 
+                text-shadow: 0 0 10px rgba(187, 134, 252, 0.4);
+            }
+
+        .nav-auth-link {
+            font-weight: 500;
+            opacity: 0.95;
+        }
+        .trailer-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+            .trailer-title h2 {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: var(--filmioo-text-color);
+                margin: 0;
+                letter-spacing: 0.5px;
+            }
+
+            .trailer-title .accent {
+                width: 5px;
+                height: 30px;
+                border-radius: 6px;
+                background: linear-gradient( 180deg, var(--filmioo-purple-light), var(--filmioo-purple-main) );
+                box-shadow: 0 0 10px var(--filmioo-purple-main);
+            }
+
+        .actor-card-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #100a1c; 
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: 16px; 
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+            .actor-card-wrapper:hover {
+                border-color: var(--filmioo-purple-light);
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+            }
+
+        .actor-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; 
+        }
+
+       
+        .actor-image-container {
+            width: 100%;
+            height: 200px; 
+            overflow: hidden;
+            margin: 0; 
+            border-radius: 0;
+            border: none;
+            position: relative;
+        }
+
+        .actor-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border: none; 
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .actor-card-wrapper:hover .actor-main-img {
+            transform: scale(1.05); 
+        }
+
+        
+        .actor-glow {
+            display: none;
+        }
+
+        .actor-details {
+            padding: 15px 10px;
+            text-align: center;
+            background: linear-gradient(to top, #100a1c, transparent); 
+        }
+
+        .actor-full-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            margin: 0 0 4px;
+        }
+
+        .actor-label {
+            font-size: 0.7rem;
+            color: var(--filmioo-purple-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg filmioo-navbar sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand filmioo-logo" asp-action="Index" asp-controller="Home">Filmioo</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link filmioo-nav-link" asp-action="Movies" asp-controller="Movie">
+                            <i class="bi bi-film me-1"></i> <span>Movies</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link filmioo-nav-link" asp-action="Index" asp-controller="Actor">
+                            <i class="bi bi-people"></i> <span>Actors</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link filmioo-nav-link" asp-action="Genres" asp-controller="Genre">
+                            <i class="bi bi-grid-3x3-gap"></i> <span>Genres</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link filmioo-nav-link" asp-action="MyWatchList" asp-controller="WatchList">
+                            <i class="bi bi-bookmark-star"></i> <span>Watch List</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav filmioo-icon-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link filmioo-nav-link nav-auth-link" asp-action="Profile" asp-controller="Account" title="Profile">
+                                <i class="bi bi-person-circle filmioo-icon"></i><span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link filmioo-nav-link nav-auth-link" asp-action="SignOut" asp-controller="Account" title="Sign Out">
+                                <i class="bi bi-box-arrow-right filmioo-icon"></i><span>Sign Out</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link filmioo-nav-link nav-auth-link" asp-action="Login" asp-controller="Account">
+                                <i class="bi bi-box-arrow-in-right"></i> <span>Login</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link filmioo-nav-link nav-auth-link" asp-action="Register" asp-controller="Account">
+                                <i class="bi bi-person-plus"></i> <span>Register</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="container-fluid filmioo-hero-section py-5 mb-5 text-center">
+        <h1 class="display-4">Discover, Review, Rate.</h1>
+        <p class="lead">Your source for the latest movies and community ratings.</p>
+    </header>
+
+    <div class="trailer-title">
+        <span class="accent"></span>
+        <h2>Full Cast Of @ViewData["Movie"]</h2>
+    </div>
+
+    <main class="container pb-5">
+        <div class="row g-4 justify-content-start mt-3">
+            @foreach (var actor in Model)
+            {
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="actor-card-wrapper">
+                        <a asp-action="Details" asp-controller="Actor" asp-route-id="@actor.Id" class="actor-card-link">
+                            <div class="actor-image-container">
+                                <img src="@actor.ProfileImageUrl" alt="@actor.FirstName" class="actor-main-img" />
+                            </div>
+
+                            <div class="actor-details">
+                                <h6 class="actor-full-name">@actor.FirstName @actor.LastName</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

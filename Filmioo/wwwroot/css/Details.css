@@ -1,0 +1,19 @@
+﻿.trailer-btn,
+.watchlist-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 16px;
+    background: #7f3cff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .trailer-btn:hover,
+    .watchlist-btn:hover {
+        box-shadow: 0 0 15px #9b5cff;
+        transform: translateY(-2px);
+    }

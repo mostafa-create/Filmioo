@@ -1,0 +1,59 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/AuthLayout.cshtml";
+}
+
+<div class="background-animation"></div>
+<div class="register-container">
+    <div class="logo">Filmioo</div>
+    <h2>Join the Cosmic Critics</h2>
+    <p>Register to review and rate your favorite movies!</p>
+    <br />
+<form asp-action="Register" asp-controller="Account" method="post" id="registerForm">
+    <div class="form-row">
+        <div class="form-group half-width">
+            <label asp-for="FName">First Name</label>
+            <input asp-for="FName" required>
+            <span asp-validation-for="FName" class="error-message"></span>
+        </div>
+        <div class="form-group half-width">
+            <label asp-for="LName">Last Name</label>
+            <input asp-for="LName" required>
+            <span asp-validation-for="LName" class="error-message"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group half-width">
+            <label asp-for="EmailAddress">Email Address</label>
+            <input asp-for="EmailAddress" required>
+            <span asp-validation-for="EmailAddress" class="error-message"></span>
+        </div>
+        <div class="form-group half-width">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" required>
+            <span asp-validation-for="Password" class="error-message"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <input asp-for="ConfirmPassword" required>
+        <span asp-validation-for="ConfirmPassword" class="error-message"></span>
+    </div>
+
+        <div class="wthree-text">
+            <label class="anim">
+                <input asp-for="IsAgree" type="checkbox" class="checkbox" required="">
+                <span>I Agree To The Terms & Conditions</span>
+            </label>
+            <div class="clear"> </div>
+        </div>
+        <br />
+
+    <button type="submit" class="register-button">Register</button>
+</form>
+
+    <p>Do You Have An Account? <a asp-action="Login"> Login Now!</a></p>
+</div>

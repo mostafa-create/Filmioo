@@ -1,0 +1,111 @@
+﻿:root {
+    --filmioo-black: #121212;
+    --filmioo-purple-main: #9333ea;
+    --filmioo-purple-light: #c084fc;
+    --filmioo-text-color: #f0f0f0;
+}
+
+body {
+    background-color: var(--filmioo-black);
+    color: var(--filmioo-text-color);
+    min-height: 100vh;
+}
+
+.filmioo-hero-section {
+    background: linear-gradient(135deg, var(--filmioo-black) 0%, #3a085b 50%, var(--filmioo-black) 100%);
+    background-size: 400% 400%;
+    animation: filmiooGradient 10s ease infinite;
+    color: var(--filmioo-text-color);
+    border-radius: 0 0 20px 20px;
+}
+
+@keyframes filmiooGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.filmioo-heading {
+    color: var(--filmioo-purple-light);
+    border-left: 5px solid var(--filmioo-purple-main);
+    padding-left: 15px;
+    font-weight: 300;
+}
+
+.filmioo-card-link {
+    text-decoration: none;
+}
+
+.filmioo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filmioo-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 2 / 3; 
+    display: block;
+}
+
+.filmioo-text-gradient {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
+    width: 100%;
+}
+
+.filmioo-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--filmioo-purple-main);
+    z-index: 10;
+}
+
+    .filmioo-card:hover .filmioo-card-img {
+        filter: brightness(1.1); 
+    }
+
+.filmioo-rating {
+    margin-top: 10px; 
+    color: var(--filmioo-text-color);
+    font-weight: 600;
+}
+
+.filmioo-star {
+    color: gold;
+}
+
+.filmioo-card.active-pulse {
+    box-shadow: 0 0 40px 15px var(--filmioo-purple-light) !important;
+    transform: scale(1.04) !important;
+}
+
+.filmioo-add-btn {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 50px;
+    background-color: transparent;
+    color: var(--filmioo-purple-light);
+    border: 2px solid var(--filmioo-purple-main);
+    transition: all 0.4s ease-in-out;
+}
+
+    .filmioo-add-btn:hover {
+        transform: scale(1.08);
+        background-color: var(--filmioo-purple-main);
+        color: var(--filmioo-text-color);
+        box-shadow: 0 0 20px rgba(147, 51, 234, 0.8);
+        border-color: var(--filmioo-purple-light);
+        cursor: pointer;
+    }

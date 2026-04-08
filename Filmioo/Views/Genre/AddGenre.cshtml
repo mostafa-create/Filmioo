@@ -1,0 +1,24 @@
+﻿@model GenreViewModel
+@{
+    ViewData["Title"] = "AddGenre";
+    Layout = "~/Views/Shared/AddingLayout.cshtml";
+}
+
+<div class="background-animation"></div>
+<div class="register-container">
+    <div class="logo">🎬 Filmioo</div>
+    <br />
+    <h1>Add An Genre</h1>
+    <br />
+    <form asp-action="AddGenre" asp-controller="Genre" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="Name">Genre Name</label>
+                    <input asp-for="Name" required>
+                    <span asp-validation-for="Name" class="error-message"></span>
+                </div>
+            </div>
+        <input type="submit" value="Add Genre" class="register-button" />
+    </form>
+</div>
+

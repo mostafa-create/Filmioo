@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link href="~/css/auth-motion.css" rel="stylesheet" />
+    
+</head>
+<body>
+
+        @RenderBody()
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/Auth_Validation.js"></script>
+    <partial name="_ValidationScriptsPartial" /> 
+    @await RenderSectionAsync("ClientSideValidation", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

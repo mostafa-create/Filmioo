@@ -1,0 +1,442 @@
+﻿@using Demo.DAL.Models
+@model IEnumerable<WatchListItem>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Filmioo | My Watch List</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+	<style>
+		:root {
+			--filmioo-black: #121212; 
+			--filmioo-purple-main: #9333ea; 
+			--filmioo-purple-light: #c084fc; 
+			--filmioo-text-color: #f0f0f0; 
+		}
+
+		body {
+			background-color: #0b0b0f;
+			color: #ffffff;
+			font-family: 'Segoe UI', sans-serif;
+		}
+
+		.navbar {
+			background-color: #000;
+			box-shadow: 0 0 15px rgba(138,43,226,.5);
+		}
+
+		.navbar-brand {
+			color: #b45cff !important;
+			font-weight: 800;
+			font-size: 1.6rem;
+		}
+		.btn-purple {
+			background-color: #8a2be2;
+			color: #fff;
+			border-radius: 30px;
+			padding: 10px 25px;
+			transition: .3s;
+		}
+		.filmioo-navbar {
+			background-color: rgba(0, 0, 0, 0.9);
+			border-bottom: 3px solid var(--filmioo-purple-main);
+		}
+
+		.filmioo-logo {
+			color: var(--filmioo-purple-main) !important;
+			font-size: 1.6rem;
+			font-weight: 700;
+			text-shadow: 0 0 8px var(--filmioo-purple-light);
+		}
+
+		.filmioo-nav-link {
+			display: flex;
+			align-items: center;
+			color: var(--filmioo-text-color) !important;
+			font-size: 0.9rem !important;
+			font-weight: 400;
+			letter-spacing: 0.3px;
+			padding: 0.5rem 0.75rem !important;
+			transition: all 0.25s ease-in-out;
+			opacity: 0.85;
+		}
+
+			.filmioo-nav-link i {
+				font-size: 1rem; 
+				margin-right: 6px;
+				color: var(--filmioo-purple-light);
+			}
+
+			.filmioo-nav-link:hover {
+				color: #fff !important;
+				opacity: 1;
+				transform: translateY(-1px); 
+				text-shadow: 0 0 10px rgba(187, 134, 252, 0.4);
+			}
+
+		.nav-auth-link {
+			font-weight: 500;
+			opacity: 0.95;
+		}
+
+		.btn-purple:hover {
+			background-color: #a855f7;
+			box-shadow: 0 0 15px #8a2be2;
+		}
+		.remove-watchlist-btn {
+			background: rgba(255, 0, 0, 0.2);
+			backdrop-filter: blur(5px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			color: white;
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+			cursor: pointer;
+			z-index: 20; 
+		}
+		.filmioo-card {
+			position: relative;
+			overflow: hidden;
+			border-radius: 12px;
+			background: #000;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			max-width: 200px; 
+			margin: 0 auto;
+		}
+
+		.filmioo-card:hover {
+			transform: translateY(-10px) scale(1.05);
+			box-shadow: 0 0 25px 5px rgba(147, 51, 234, 0.7);
+			border: 1px solid var(--filmioo-purple-light);
+		}
+
+		.filmioo-card-img {
+			aspect-ratio: 2 / 3;
+			object-fit: cover;
+			transition: filter 0.3s ease;
+		}
+
+		.filmioo-card:hover .filmioo-card-img {
+			filter: brightness(1.1) contrast(1.1);
+		}
+
+		.filmioo-main-link {
+			text-decoration: none;
+			display: block;
+			height: 100%;
+		}
+
+		.remove-watchlist-btn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background: rgba(0, 0, 0, 0.6);
+			backdrop-filter: blur(8px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			color: white;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			z-index: 30; 
+		}
+
+		.extra-small {
+			font-size: 0.75rem;
+		}
+			.remove-watchlist-btn:hover {
+				background: #ff4d4d;
+				transform: scale(1.2);
+				box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
+			}
+
+			.remove-watchlist-btn i {
+				font-size: 0.9rem;
+			}
+
+		.filmioo-text-gradient {
+			background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+			width: 100%;
+		}
+
+		.text-purple-light {
+			color: var(--filmioo-purple-light);
+		}
+
+		.btn-remove-watchlist {
+			position: absolute;
+			bottom: 8px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: rgba(255, 118, 117, 0.2); 
+			color: #ff7675;
+			border: 1px solid #ff7675;
+			border-radius: 20px;
+			padding: 4px 12px;
+			font-size: 0.75rem;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			z-index: 10;
+			backdrop-filter: blur(4px);
+		}
+
+			.btn-remove-watchlist:hover {
+				background: #ff7675;
+				color: white;
+				box-shadow: 0 0 10px rgba(255, 118, 117, 0.5);
+			}
+		.filmioo-modal-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.85);
+			backdrop-filter: blur(5px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.3s ease;
+			z-index: 9999;
+		}
+
+			.filmioo-modal-overlay:target {
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+		.filmioo-modal-content {
+			background: linear-gradient(145deg, #1a0022, #0b0b0f);
+			padding: 40px;
+			border-radius: 20px;
+			border: 1px solid var(--filmioo-purple-main);
+			text-align: center;
+			max-width: 400px;
+			box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+			transform: scale(0.8);
+			transition: transform 0.3s ease;
+		}
+
+		.filmioo-modal-overlay:target .filmioo-modal-content {
+			transform: scale(1);
+		}
+
+		.warning-icon {
+			font-size: 4rem;
+			color: #ff4d4d;
+			margin-bottom: 20px;
+		}
+
+		.modal-actions {
+			display: flex;
+			gap: 15px;
+			margin-top: 30px;
+			justify-content: center;
+		}
+
+		.btn-cancel {
+			text-decoration: none;
+			color: #bbb;
+			padding: 10px 20px;
+			border-radius: 8px;
+			transition: 0.3s;
+		}
+
+			.btn-cancel:hover {
+				color: #fff;
+				background: rgba(255,255,255,0.1);
+			}
+
+		.btn-confirm {
+			text-decoration: none;
+			background: #ff4d4d;
+			color: white;
+			padding: 10px 25px;
+			border-radius: 8px;
+			font-weight: bold;
+			box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+		}
+
+			.btn-confirm:hover {
+				background: #ff2a2a;
+				box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+			}
+
+
+		footer {
+			margin-top: 80px;
+			padding: 20px;
+			text-align: center;
+			color: #777;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg filmioo-navbar sticky-top">
+		<div class="container-fluid">
+			<a class="navbar-brand filmioo-logo" asp-action="Index" asp-controller="Home">Filmioo</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link filmioo-nav-link" asp-action="Movies" asp-controller="Movie">
+							<i class="bi bi-film me-1"></i> <span>Movies</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link filmioo-nav-link" asp-action="Index" asp-controller="Actor">
+							<i class="bi bi-people"></i> <span>Actors</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link filmioo-nav-link" asp-action="Genres" asp-controller="Genre">
+							<i class="bi bi-grid-3x3-gap"></i> <span>Genres</span>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="navbar-nav filmioo-icon-nav">
+					@if (User.Identity.IsAuthenticated)
+					{
+						<li class="nav-item">
+							<a class="nav-link filmioo-nav-link nav-auth-link" asp-action="Profile" asp-controller="Account" title="Profile">
+								<i class="bi bi-person-circle filmioo-icon"></i><span>Profile</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link filmioo-nav-link nav-auth-link" asp-action="SignOut" asp-controller="Account" title="Sign Out">
+								<i class="bi bi-box-arrow-right filmioo-icon"></i><span>Sign Out</span>
+							</a>
+						</li>
+					}
+					else
+					{
+						<li class="nav-item">
+							<a class="nav-link filmioo-nav-link nav-auth-link" asp-action="Login" asp-controller="Account" title="Login">
+								<i class="bi bi-box-arrow-in-right"></i> <span>Login</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link filmioo-nav-link nav-auth-link" asp-action="Register" asp-controller="Account" title="Register">
+								<i class="bi bi-person-plus"></i> <span>Register</span>
+							</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container py-5">
+		<h2 class="filmioo-heading mb-5">My Watchlist</h2>
+
+		<div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4" id="watchlist-grid">
+			@foreach (var item in Model)
+			{
+				<div class="col" id="movie-card-@item.MovieId">
+					<div class="card filmioo-card border-0 position-relative">
+						<a href="/Movie/Details/@item.MovieId" class="filmioo-main-link">
+							<img src="@item.PosterImageUrl" class="card-img filmioo-card-img" alt="@item.MovieTitle">
+							<div class="card-img-overlay d-flex flex-column p-0">
+								<div class="mt-auto filmioo-text-gradient p-3 pb-5">
+									<h6 class="card-title text-light m-0 text-truncate">@item.MovieTitle</h6>
+								</div>
+							</div>
+						</a>
+						<a href="#delete-modal"
+						   class="btn-remove-watchlist"
+						   onclick="prepareMovieDelete('@item.MovieId', '@item.MovieTitle')">
+							<i class="bi bi-x-circle"></i> Remove
+						</a>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+
+	<footer>
+		&copy; 2025 Filmioo &mdash; Movies made better
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init({ duration: 900, once: true });
+	</script>
+	<div id="delete-modal" class="filmioo-modal-overlay" style="display:none;">
+		<div class="filmioo-modal-content">
+			<i class="fa-solid fa-circle-question warning-icon" style="color: #a29bfe;"></i>
+			<h3>Remove from Watchlist?</h3>
+			<p>Are you sure you want to remove <strong id="delete-movie-title"></strong>?</p>
+
+			<div class="modal-actions">
+				<a href="#" class="btn-cancel" onclick="closeModal()">Cancel</a>
+
+				<input type="hidden" id="delete-movie-id" />
+				<button type="button" class="btn-confirm"
+						style="background: #ff7675;"
+						onclick="confirmWatchlistRemoval()">
+					Yes, Remove
+				</button>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script>
+	function prepareMovieDelete(id, title) {
+		document.getElementById('delete-movie-id').value = id;
+		document.getElementById('delete-movie-title').innerText = title;
+		document.getElementById('delete-modal').style.display = 'flex'; 
+	}
+
+	function closeModal() {
+		document.getElementById('delete-modal').style.display = 'none';
+	}
+	function confirmWatchlistRemoval() {
+		const movieId = document.getElementById('delete-movie-id').value;
+
+		removeFromWatchlist(movieId);
+		closeModal();
+	}
+
+	function removeFromWatchlist(movieId) {
+		fetch(`/WatchList/ToggleWatchlist?movieId=${movieId}`, {
+			method: 'POST',
+			headers: {
+				'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success && data.action === "removed") {
+				const card = document.getElementById(`movie-card-${movieId}`);
+				if(card) {
+					card.style.opacity = '0';
+					card.style.transform = 'scale(0.8)';
+					setTimeout(() => card.remove(), 300);
+				}
+			}
+		})
+		.catch(error => console.error('Error:', error));
+	}
+</script>
+

@@ -1,0 +1,54 @@
+﻿@model ActorViewModel
+@{
+    ViewData["Title"] = "Add Actor";
+    Layout = "~/Views/Shared/AddingLayout.cshtml";
+}
+
+<div class="background-animation"></div>
+<div class="register-container">
+    <div class="logo">🎬 Filmioo</div>
+    <br />
+    <h1>Add An Actor</h1>
+    <br />
+    <form asp-action="AddActor" asp-controller="Actor" enctype="multipart/form-data">
+        <div>
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label asp-for="FirstName">First Name</label>
+                    <input asp-for="FirstName" required>
+                    <span asp-validation-for="FirstName" class="error-message"></span>
+                </div>
+                <div class="form-group half-width">
+                    <label asp-for="LastName">Last Name</label>
+                    <input asp-for="LastName" required>
+                    <span asp-validation-for="LastName" class="error-message"></span>
+                </div>
+            </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Bio">Biography</label>
+                        <input asp-for="Bio" required>
+                        <span asp-validation-for="Bio" class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBirth">Date Of Birth</label>
+                    <input asp-for="DateOfBirth" required>
+                    <span asp-validation-for="DateOfBirth" class="error-message"></span>
+                </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group half-width">
+                <label class="col-form-label" asp-for="ProfileImageFile"> Image</label>
+                <input class=" form-control" asp-for="ProfileImageFile" />
+            </div>
+                <div class="form-group half-width">
+                <label asp-for="Nationality">Nationality</label>
+                    <input asp-for="Nationality" required>
+                    <span asp-validation-for="Nationality" class="error-message"></span>
+                </div>
+            </div>
+        <input type="submit" value="Add Actor" class="register-button" />
+    </form>
+</div>
+

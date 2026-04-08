@@ -1,0 +1,80 @@
+﻿@model UpdateActorViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/AddingLayout.cshtml";
+}
+
+
+<div class="background-animation"></div>
+<div class="register-container">
+    <div class="logo">🎭 Filmioo</div>
+    <br />
+    <h1>Update Actor</h1>
+    <p class="text-slate-400">Updating profile for <strong>@Model.FirstName</strong></p>
+    <br />
+
+    <form asp-action="Edit" asp-controller="Actor" enctype="multipart/form-data" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ExistingImageUrl" />
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" required>
+                <span asp-validation-for="FirstName" class="error-message"></span>
+            </div>
+            <div class="form-group half-width">
+                <label asp-for="LastName">Last Name</label>
+                <input asp-for="LastName">
+                <span asp-validation-for="LastName" class="error-message"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="ImageFile">Profile Picture</label>
+                <input asp-for="ImageFile" type="file" class="form-control" onchange="previewImage(this)" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="Bio">Biography</label>
+                <textarea asp-for="Bio" class="form-control" rows="4"
+                          style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); width: 100%; border-radius: 8px;"></textarea>
+                <span asp-validation-for="Bio" class="error-message"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label asp-for="Nationality">Nationality</label>
+                <input asp-for="Nationality">
+                <span asp-validation-for="Nationality" class="error-message"></span>
+            </div>
+            <div class="form-group half-width">
+                <label asp-for="DateOfBirth">Date of Birth</label>
+                <input asp-for="DateOfBirth" type="date">
+                <span asp-validation-for="DateOfBirth" class="error-message"></span>
+            </div>
+        </div>
+
+        <div class="mt-8 flex flex-row items-center justify-between gap-4 w-full">
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <button type="submit" class="register-button flex-1" style="margin: 0;">
+                        Save Changes
+                    </button>
+                </div>
+                <div class="form-group half-width">
+                    <button asp-action="Index" class="register-button flex-1" style="margin: 0;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

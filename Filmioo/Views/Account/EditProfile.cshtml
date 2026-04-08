@@ -1,0 +1,52 @@
+﻿@model EditProfileViewModel
+@{
+    ViewData["Title"] = "Edit Profile";
+    Layout = "~/Views/Shared/AddingLayout.cshtml";
+}
+
+<div class="background-animation"></div>
+<div class="register-container edit-profile-container">
+    <div class="logo">Filmioo</div>
+    <h2>Update Your Identity</h2>
+    <p>Fine-tune your presence in the Cosmic Critics circle.</p>
+    <br />
+
+    <form asp-action="EditProfile" asp-controller="Account" method="post" enctype="multipart/form-data" id="editProfileForm">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <div class="profile-pic-section">
+            <input asp-for="ImageFile" type="file" id="ImageFile" class="hidden-input" onchange="previewImage(this)" accept="image/*">
+            <label class="upload-label">Change Profile Picture</label>
+            <span asp-validation-for="ImageFile" class="error-message"></span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label asp-for="FName">First Name</label>
+                <input asp-for="FName" placeholder="Enter first name">
+                <span asp-validation-for="FName" class="error-message"></span>
+            </div>
+            <div class="form-group half-width">
+                <label asp-for="LName">Last Name</label>
+                <input asp-for="LName" placeholder="Enter last name">
+                <span asp-validation-for="LName" class="error-message"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label asp-for="Email">Email Address (Read-only)</label>
+                <input asp-for="Email" readonly style="opacity: 0.6; cursor: not-allowed;">
+            </div>
+        </div>
+
+        <br />
+        <div class="form-actions">
+            <button type="submit" class="register-button">Save Changes</button>
+            <a asp-action="Profile" class="btn-cancel-link">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
