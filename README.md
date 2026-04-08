@@ -46,8 +46,13 @@ The project follows the separation of concerns principle to ensure maintainabili
 
 ---
 
-## 🏁 Getting Started
+## 📺 Project Demo (Video)
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/mostafa-create/Filmioo.git](https://github.com/mostafa-create/Filmioo.git)
+Curious to see **Filmioo** in action? Check out the full walkthrough and UI demonstration on LinkedIn:
+
+👉 **[Watch the Demo Video on LinkedIn](PASTE_YOUR_LINKEDIN_URL_HERE)**
+
+---
+
+### 👨‍💻 Developed by **Mostafa Yassin**
+*Software Engineering student at Sohag University.*
