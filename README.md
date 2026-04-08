@@ -1,94 +1,71 @@
-\documentclass[12pt,a4paper]{article}
+🎬 Filmioo - Cinematic Movie Discovery & Review Platform
+Filmioo is a high-end web application built with ASP.NET Core MVC that provides users with a seamless, immersive experience to discover movies, manage personal watchlists, and share reviews. The project focuses on a "Cosmic" dark-themed design and a robust 3-layer backend architecture.
 
-% --- Packages ---
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage{hyperref} % For clickable links
-\usepackage{graphicx} % For images
-\usepackage{xcolor}   % For colored text
-\usepackage{geometry} % Page margins
-\usepackage{enumitem} % Better lists
-\usepackage{listings} % For code snippets
+🚀 Key Features
+⚡ Real-Time Interactions: Powered by AJAX & jQuery, allowing users to add, edit, and delete reviews without refreshing the page for a smooth SPA-like feel.
 
-\geometry{margin=1in}
+🏗️ Professional Architecture: Built using a 3-Layer Architecture (Presentation, Business Logic, and Data Access) with the Repository & Unit of Work patterns.
 
-% --- Custom Colors ---
-\definecolor{cosmicpurple}{HTML}{9333EA}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+🎨 Cosmic UI/UX: A custom dark-mode interface crafted with a hybrid of Tailwind CSS and Bootstrap 5, featuring high-end glassmorphism and AOS (Animate On Scroll) effects.
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    urlcolor=cosmicpurple,
-    pdftitle={Filmioo Project Documentation}
-}
+🔐 Secure User Profiles: Full integration with ASP.NET Core Identity for personalized profiles, custom avatars, and watchlist management.
 
-% --- Title Info ---
-\title{
-    \Huge \textbf{\color{cosmicpurple} Filmioo} \\
-    \large Cinematic Movie Discovery \& Review Platform
-}
-\author{\textbf{Mostafa Yassin} \\ Software Engineering Student | Sohag University}
-\date{April 2026}
+📊 Automated Rating System: Real-time backend calculation of average movie ratings based on user feedback.
 
-\begin{document}
+🔗 Complex Data Relationships: Efficiently handles Many-to-Many relationships between Movies, Actors, and Genres.
 
-\maketitle
+🛠️ Tech Stack
+Backend
+Framework: ASP.NET Core MVC 8.0
 
-\section{Introduction}
-\textbf{Filmioo} is a high-end web application developed using the \textbf{ASP.NET Core MVC} framework. It is designed to provide users with an immersive, cinematic experience while browsing movies, managing personal watchlists, and sharing reviews. The project highlights a modern "Cosmic" dark-themed UI and follows professional software architecture standards.
+Language: C#
 
-\section{Key Features}
-\begin{itemize}[label=\textcolor{cosmicpurple}{\textbullet}]
-    \item \textbf{Real-Time Interactions:} Leverages \textbf{AJAX \& jQuery} to perform CRUD operations on reviews (Add, Edit, Delete) without page reloads.
-    \item \textbf{Clean Architecture:} Implemented using a \textbf{3-Layer Architecture} consisting of Presentation, Business Logic, and Data Access layers.
-    \item \textbf{Design Patterns:} Utilizes the \textbf{Repository Pattern} and \textbf{Unit of Work} for efficient and maintainable data management.
-    \item \textbf{Cosmic UI/UX:} A custom responsive interface built with a hybrid of \textbf{Tailwind CSS} and \textbf{Bootstrap 5}, featuring glassmorphism and Animate On Scroll (AOS) effects.
-    \item \textbf{Identity \& Security:} Fully integrated with \textbf{ASP.NET Core Identity} for secure authentication and user-specific data management.
-\end{itemize}
+Database: SQL Server (SSMS)
 
-\section{Tech Stack}
-\subsection{Backend}
-\begin{itemize}
-    \item Framework: ASP.NET Core MVC 8.0
-    \item Language: C\#
-    \item ORM: Entity Framework Core (Code First)
-    \item Database: Microsoft SQL Server
-\end{itemize}
+ORM: Entity Framework Core (Code First)
 
-\subsection{Frontend}
-\begin{itemize}
-    \item Styling: Tailwind CSS \& Bootstrap 5
-    \item Scripts: JavaScript (ES6+), jQuery, AJAX
-    \item Animations: AOS.js
-\end{itemize}
+Frontend
+Styling: Tailwind CSS & Bootstrap 5
 
-\section{Project Structure}
-The solution is organized into three distinct layers to ensure separation of concerns:
-\begin{enumerate}
-    \item \textbf{Demo.PL (Presentation Layer):} Handles the UI, Razor Views, and ViewModels.
-    \item \textbf{Demo.BLL (Business Logic Layer):} Contains repository interfaces and service implementations.
-    \item \textbf{Demo.DAL (Data Access Layer):} Manages the Database Context, Migrations, and Entities.
-\end{enumerate}
+Interactivity: JavaScript (ES6+), jQuery, AJAX
 
-\section{Installation \& Setup}
-To run this project locally, follow these steps:
-\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily, breaklines=true, frame=single]
-# 1. Clone the repo
+Animations: AOS.js (Animate On Scroll) & Lucide/Bootstrap Icons
+
+🏗️ Project Structure
+The project follows the separation of concerns principle to ensure maintainability:
+
+Demo.PL (Presentation Layer): Contains Controllers, Views (Razor), and ViewModels.
+
+Demo.BLL (Business Logic Layer): Contains the interfaces and the implementation of Repositories and Unit of Work.
+
+Demo.DAL (Data Access Layer): Contains the DbContext, Migrations, and Data Models.
+
+📸 Screen Previews
+Dynamic Review System: Custom AJAX-powered modals for editing and deleting reviews.
+
+User Profile: Comprehensive dashboard showing joined date, total reviews, and visual watchlist.
+
+Movie Details: Cinematic layout with official trailer embedding and cast profiles.
+
+🏁 Getting Started
+Clone the repository:
+
+Bash
+
 git clone https://github.com/mostafa-create/Filmioo.git
+Update Connection String: Modify appsettings.json in the Presentation Layer to point to your local SQL Server instance.
 
-# 2. Apply Migrations
-dotnet ef database update
+Apply Migrations:
 
-# 3. Run the application
-dotnet run
-\end{lstlisting}
+Bash
 
-\section{Project Demo}
-A full video demonstration of the platform, including the dynamic review system and profile management, can be found on LinkedIn:
+Update-Database
+Run the project! 🚀
 
-\vspace{0.5cm}
-\centering
-\textbf{\url{INSERT_YOUR_LINKEDIN_VIDEO_URL_HERE}}
+📺 Project Demo (Video)
+Curious to see Filmioo in action? Check out the full walkthrough and UI demonstration on LinkedIn:
 
-\end{document}
+👉 Watch the Demo Video on LinkedIn
+
+👨‍💻 Developed by Mostafa Yassin
+Software Engineering student at Sohag University.
